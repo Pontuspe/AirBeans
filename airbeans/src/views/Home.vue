@@ -1,8 +1,6 @@
 <template>
 <div class="container">
-    <img src="@/assets/intro-graphic-left.svg" alt="Beautiful leafs on the left">
-    <img src="@/assets/airbean-landing.svg" alt="AirBean logo and text">
-    <img src="@/assets/intro-graphic-right.svg" alt="Beautiful leafs on the right">
+   
 </div>
 </template>
 
@@ -17,6 +15,7 @@ export default {
     display: flex;
     justify-content: space-between;
     object-fit: cover;
+    
 }
 
 </style>
@@ -24,5 +23,9 @@ export default {
 <style lang="scss">
 body{
     background-color: var(--AirBeanGreen);
+    background-image: url('~@/assets/intro-graphic-left.svg'),url('~@/assets/airbean-landing.svg'), url('~@/assets/intro-graphic-right.svg');
+    background-position: left top, center, right top;
+    background-repeat: no-repeat;
+    background-size: contain, auto, contain;
 }
 </style>
