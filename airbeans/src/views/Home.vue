@@ -1,12 +1,10 @@
 <template>
-<div class="container">
-   
+<div class="container">   
 </div>
 </template>
 
 <script>
 export default {
-
 }
 </script>
 <style lang="scss" scoped>
@@ -15,7 +13,6 @@ export default {
     display: flex;
     justify-content: space-between;
     object-fit: cover;
-    
 }
 
 </style>
