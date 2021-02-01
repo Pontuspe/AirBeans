@@ -13,10 +13,10 @@ export default {
 </script>
 <style lang="scss" scoped>
 .container{
+    height:100%;
     display: flex;
-    img:nth-of-type(){
-        height:100%;
-    }
+    justify-content: space-between;
+    object-fit: cover;
 }
 
 </style>
