@@ -45,13 +45,19 @@ export default {
 @import '~@/styles/buttons.scss';
 @import '~@/styles/globals.scss';
 @import '~@/styles/text.scss';
+
 header{
   width:100%;
   position:fixed;
   z-index: 3;
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
+
+  .btn {
+    margin: 1rem;
+  }
 }
+
 .overlay{
 position: fixed; 
   width: 100%; 
@@ -63,10 +69,13 @@ position: fixed;
   background-color: rgba(0,0,0,0.9);
   z-index: 2;
 }
+
 .fadedOut{
   opacity: .1;
 }
+
 .topMargin{
   margin-top:35%;
 }
+
 </style>

@@ -1,49 +1,39 @@
 <template>
-  <div class="container"> 
+  <div class="container">
     <h1>Meny</h1>
-
     <ul>
+
       <li
       v-for="(item, index) in menu"
       :key="index"
       >
+        <div class="menu-item">
 
-      <div class="item-container">
+          <button class="add-btn"><div class="add"></div></button>
 
-        <button class="btn dark">+</button>
         <div class="content">
-          <div class="top">
-            
-            <h3>{{item.title}}</h3>
+            <div class="top">
+              <h3>{{item.title}}</h3>
 
-            <hr class="dots" />
+              <div class="dots"><hr></div>
 
-            <h3 class="price">{{item.price}} kr</h3>
+              <h3 class="price">{{item.price}} kr</h3>
+            </div>
 
-          </div>
-
-          <div class="bottom">
-
-            <p>{{item.desc}}</p>
-
+            <div class="bottom">
+              <p>{{item.desc}}</p>
+            </div>
           </div>
         </div>
-
-      </div>
-      
       </li>
 
     </ul>
-
   </div>
 </template>
 
 <script>
 export default {
 
-  props: {
-    //menu : Array
-  },
   data() { return {
       menu:[
       {"id":1,"title":"Bryggkaffe","desc":"Bryggd på månadens bönor.","price":39},
@@ -68,7 +58,7 @@ export default {
       },
       {"id":6,"title":"Cortado","desc":"Bryggd på månadens bönor.","price":39}
     ]
-  }},
+  }}
 
 }
 </script>
@@ -79,42 +69,56 @@ export default {
 .container {
   flex-direction: column;
   justify-content: flex-start;
-}
 
-.item-container {
-  display: flex;
-  align-items: center;
-
-  .btn {
-    height: 2rem;
-    width: 2rem;
-  }
-
-  .content {
-
+  .menu-item {
+    margin-top: 2rem;
     display: flex;
-    flex-direction: column;
+    align-items: center;
     text-align: left;
 
-    .top {
+    .content {
+      width: 100%;
       display: flex;
+      flex-direction: column;
+      margin-right: 1rem;
+      margin-top: 1rem;
+      align-self: center;
+      justify-self: center;
 
-      .dots {
-        border-bottom: 1px dotted black;
+      .top {
+        display: flex;
+        justify-content: space-between;
 
-        hr {
-          opacity: 0;
+        h3 {
+          font-size: 2rem;
+          line-height: 1.7rem;
         }
+
+        .dots {
+          flex-grow: 2;
+          border-bottom: 1px dotted black;
+          margin: 0 .5rem;
+
+          hr {
+            display: none;
+          }
+
+        }
+
+        .price {
+          align-self: flex-end;
+        }
+
       }
 
-      .price {
-        justify-self: flex-end;
+      .bottom {
+        font-size: 1.2rem;
+        line-height: 3rem;
+        letter-spacing: .2rem;
       }
-
     }
-
   }
-}
 
+}
 
 </style>

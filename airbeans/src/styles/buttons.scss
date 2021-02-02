@@ -34,3 +34,16 @@ button{
       background-position: center;
       } 
   }
+
+  .add-btn {
+    background-color: black;
+    background-image: url('~@/assets/add.svg');
+    background-position: center;
+    background-size: 1.8rem;
+    background-repeat: no-repeat;
+    padding: 1.5rem;
+    margin: 1rem;
+    border-radius: 100%;
+    border: none;
+    outline: none;
+  }
