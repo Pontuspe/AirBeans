@@ -7,6 +7,7 @@ button{
     border-radius: 100%;
     border:none;
     padding:1rem;
+    
       .navClosed{
         height:100%;
         background-image:url('~@/assets/navicon.svg');
@@ -14,13 +15,17 @@ button{
         background-size:auto;
         background-repeat: no-repeat;
       }
+
       .closeX{
       font-size:2rem;
       color:black;
       }
+
       &.dark{
         background-color:black;
+        color: white;
       }
+
       .cart{
       height:100%;
       background-image:url('~@/assets/bag.svg');
