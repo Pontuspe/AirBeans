@@ -1,0 +1,25 @@
+.greenBody{
+
+    background-color: var(--AirBeanGreen);
+    background-image: url('~@/assets/intro-graphic-left.svg'),url('~@/assets/airbean-landing.svg'), url('~@/assets/intro-graphic-right.svg');
+    background-position: left top, center, right top;
+    background-repeat: no-repeat;
+    background-size: contain, auto, contain;
+}
+.pinkBody{
+    background-color: var(--AirBeanPink);
+    background-image: url('~@/assets/graphics-header.svg'), url('~@/assets/graphics-footer.svg');
+    background-position: top center, bottom center;
+    background-repeat: no-repeat;
+    background-size: contain; 
+}
+.darkBody{
+    background-color: var(--AirBeanBrown);
+    background-image: url('~@/assets/graphics-header.svg');
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.orangeBody{
+    background-color: var(--AirBeanOrange);
+}

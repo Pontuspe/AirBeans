@@ -1,0 +1,31 @@
+button{
+  outline: none;
+}
+.btn{
+    height: 5rem;
+    width: 5rem;
+    border-radius: 100%;
+    border:none;
+    padding:1rem;
+      .navClosed{
+        height:100%;
+        background-image:url('~@/assets/navicon.svg');
+        background-position: center;
+        background-size:auto;
+        background-repeat: no-repeat;
+      }
+      .closeX{
+      font-size:2rem;
+      color:black;
+      }
+      &.dark{
+        background-color:black;
+      }
+      .cart{
+      height:100%;
+      background-image:url('~@/assets/bag.svg');
+      background-repeat: no-repeat;
+      background-size:auto;
+      background-position: center;
+      } 
+  }

@@ -1,59 +1,56 @@
 <template>
-  <div id="app">
+  <div id="app" :class="setBody()">
     <header>
-        <button class="btn" @click="navActive = !navActive">
-          <div v-if="!navActive" class="navClosed">
-            
-          </div>
+        <button :disabled="cartActive" class="btn" @click="navActive = !navActive">
+          <div v-if="!navActive" class="navClosed"></div>
           <p v-else class="closeX">X</p>
         </button>
-        <button class="btn dark" @click="cartActive = !cartActive">
+        <button :disabled="navActive" class="btn dark" :class="{fadedOut :navActive}" @click="cartActive = !cartActive">
           <div class="cart">
           </div>
         </button>
     </header>
-    <router-view/>
+    <router-view :class="{topMargin :$route.path != '/status'}"/>
     <nav v-if="navActive" class="overlay">
-      
+        <Nav />
     </nav>
-    <div v-if="cartActive" class="cart overlay">
-      
-    </div>
+    <div v-if="cartActive" class="cart overlay"></div>
   </div>
 </template>
+
 <script>
+import Nav from '@/components/Nav'
+
 export default {
   data(){
     return{
       navActive : false,
       cartActive : false
     }
+  },
+  components:{ Nav},
+  methods:{
+    setBody(){
+      const path = this.$route.path
+      return path == '/'        ? 'greenBody' : 
+             path == '/status'  ? 'orangeBody' :
+             path == '/profile' ? 'darkBody' : 
+             'pinkBody'
+    }
   }
 }
 </script>
 <style lang="scss">
-*, *:after, *:before{
-  margin:0;
-  padding:0;
-}
-html, body{
-  width:100%;
-  height:100%;
-  overflow-x:hidden;
-  font-size:10px;
-}
-:root{
-  --AirBeanGreen: #0e927d;
-  --AirBeanBrown: #2f2926;
-  --AirBeanPink: #f3e4e1;
-  --AirBeanOrange: #e5674e;
-}
+@import '~@/styles/bodies.scss';
+@import '~@/styles/buttons.scss';
+@import '~@/styles/globals.scss';
+@import '~@/styles/text.scss';
 header{
   width:100%;
   position:fixed;
   z-index: 3;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; 
 }
 .overlay{
 position: fixed; 
@@ -66,36 +63,10 @@ position: fixed;
   background-color: rgba(0,0,0,0.9);
   z-index: 2;
 }
-
-.btn{
-  height: 5rem;
-  width: 5rem;
-  border-radius: 100%;
-  border:none;
-  padding:1rem;
-    .navClosed{
-      height:100%;
-      background-image:url('~@/assets/navicon.svg');
-      background-position: center;
-      background-size:auto;
-      background-repeat: no-repeat;
-    }
-    .closeX{
-    font-size:2rem;
-    color:black;
-    }
-    &.dark{
-      background-color:black;
-    }
-    .cart{
-    height:100%;
-    background-image:url('~@/assets/bag.svg');
-    background-repeat: no-repeat;
-    background-size:auto;
-    background-position: center;
-    }
-
+.fadedOut{
+  opacity: .1;
 }
-
-
+.topMargin{
+  margin-top:35%;
+}
 </style>
