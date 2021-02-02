@@ -1,20 +1,32 @@
-*, *:after, *:before{
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif&family=Work+Sans:wght@300&display=swap%27');
+@import url('https://cdn.jsdelivr.net/npm/animate.css@3.5.1');
+
+*, 
+*:after, 
+*:before {
     margin:0;
     padding:0;
   }
-  html, body, #app{
+
+  html, 
+  body, 
+  #app {
     width:100%;
     height:100%;
     overflow-x:hidden;
     font-size:10px;
   }
-  :root{
+
+  :root {
     --AirBeanGreen: #0e927d;
     --AirBeanBrown: #2f2926;
     --AirBeanPink: #f3e4e1;
     --AirBeanOrange: #e5674e;
+    --Serif-font: 'PT Serif';
+    --Sans-serif-font: 'Work Sans';
   }
-  .container{
+
+  .container {
     height:100%;
     display:flex;
     justify-content: center;

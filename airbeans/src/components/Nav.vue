@@ -5,7 +5,7 @@
           :key="index">
           <router-link 
             :to="route.route"
-            @click.native="$parent.navActive = false">
+            @click.native="$parent.nav.isActive = false">
             {{route.name}}
             
           </router-link>

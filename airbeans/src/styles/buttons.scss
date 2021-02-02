@@ -1,6 +1,9 @@
 button{
   outline: none;
+  font-size: 2rem;
+  font-family: var(--Serif-font);
 }
+
 .btn{
     height: 5rem;
     width: 5rem;
@@ -35,7 +38,7 @@ button{
       } 
   }
 
-  .add-btn {
+  .addBtn {
     background-color: black;
     background-image: url('~@/assets/add.svg');
     background-position: center;
@@ -46,4 +49,38 @@ button{
     border-radius: 100%;
     border: none;
     outline: none;
+    animation: fadeIn 1s;
+  }
+
+  .confirmAdd {
+    background-color: transparent;
+    background-image: url('~@/assets/check-solid.svg');
+    animation: fadeAndGrow 1s;
+  }
+
+  .black-btn {
+    background-color: black;
+    color: white;
+    padding: 1rem;
+    border-radius: 25px;
+    border: transparent;
+  }
+
+  .black-btn:hover {
+    background-color: var(--AirBeanBrown);
+  }
+
+  @keyframes fadeAndGrow {
+    0% {
+      opacity: 0;
+    }
+
+    75% {
+      opacity: 1;
+      transform: scale(2);
+    }
+
+    100% {
+      opacity: 0;
+    }
   }

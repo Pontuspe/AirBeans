@@ -1,34 +1,57 @@
 <template>
   <div id="app" :class="setBody()">
+
     <header>
-        <button :disabled="cartActive" class="btn" @click="navActive = !navActive">
-          <div v-if="!navActive" class="navClosed"></div>
-          <p v-else class="closeX">X</p>
-        </button>
-        <button :disabled="navActive" class="btn dark" :class="{fadedOut :navActive}" @click="cartActive = !cartActive">
-          <div class="cart">
-          </div>
-        </button>
+      <Header
+      v-if="!cart.isActive" 
+      />
     </header>
+
     <router-view :class="{topMargin :$route.path != '/status'}"/>
-    <nav v-if="navActive" class="overlay">
+    
+    <transition 
+    enter-active-class="animated fadeIn"
+    leave-active-class="animated fadeOut"
+    >
+      <nav v-if="nav.isActive" class="overlay">
         <Nav />
-    </nav>
-    <div v-if="cartActive" class="cart overlay"></div>
+      </nav>
+    </transition>
+
+    <transition 
+    enter-active-class="animated fadeIn"
+    leave-active-class="animated fadeOut"
+    >
+      <div v-if="cart.isActive" class="cart overlay">
+          <Order />
+      </div>
+    </transition>
+
   </div>
 </template>
 
 <script>
 import Nav from '@/components/Nav'
+import Order from '@/components/Order'
+import Header from '@/components/Header'
 
 export default {
-  data(){
-    return{
-      navActive : false,
-      cartActive : false
-    }
+  data(){ return{
+    navActive : false,
+    cartActive : false
+  }},
+
+  computed: {
+      nav() {
+          return this.$store.state.overlays.find(x => x.name == 'nav')
+      },
+      cart() {
+          return this.$store.state.overlays.find(x => x.name == 'cart')
+      }
   },
-  components:{ Nav},
+
+  components:{ Nav, Order, Header },
+
   methods:{
     setBody(){
       const path = this.$route.path
@@ -36,7 +59,26 @@ export default {
              path == '/status'  ? 'orangeBody' :
              path == '/profile' ? 'darkBody' : 
              'pinkBody'
+    },
+
+    activateOverlay(item) {
+      if(item == 'nav') {
+        this.navActive = !this.navActive
+      }
+      else {
+        this.cartActive = !this.cartActive
+      }
     }
+  },
+
+  created() {
+
+    // Create a new cart on startup
+    if(!sessionStorage.getItem('cart')) {
+      sessionStorage.setItem('cart', '[]')
+    }
+
+    this.$store.state.cart = JSON.parse(sessionStorage.getItem('cart'))
   }
 }
 </script>
@@ -58,8 +100,8 @@ header{
   }
 }
 
-.overlay{
-position: fixed; 
+.overlay {
+  position: fixed; 
   width: 100%; 
   height: 100%;
   top: 0;
@@ -70,12 +112,16 @@ position: fixed;
   z-index: 2;
 }
 
-.fadedOut{
-  opacity: .1;
-}
-
 .topMargin{
   margin-top:35%;
+}
+
+.fadeIn {
+  animation-duration: .5s;
+}
+
+.fadeOut {
+  animation-duration: .3s;
 }
 
 </style>

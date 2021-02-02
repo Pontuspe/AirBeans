@@ -8,8 +8,14 @@
       :key="index"
       >
         <div class="menu-item">
-
-          <button class="add-btn"><div class="add"></div></button>
+          
+          <button 
+          class="addBtn"
+          :class="{ addBtn : !added, confirmAdd : added && addedItem == index }"
+          @click="addToCart(item, index)"
+          >
+            <div class="add"></div>
+          </button>
 
         <div class="content">
             <div class="top">
@@ -57,8 +63,24 @@ export default {
         "price":54
       },
       {"id":6,"title":"Cortado","desc":"Bryggd på månadens bönor.","price":39}
-    ]
-  }}
+    ],
+    added : false,
+    addedItem : 0
+  }},
+
+  methods: {
+    addToCart(item, index) {
+      this.$store.commit('addItem', item)
+
+      // Below is used for confirmation animation
+      this.added = true
+      this.addedItem = index
+
+      setTimeout(() => {
+        this.added = false
+      }, 1000)
+    }
+  }
 
 }
 </script>
@@ -118,7 +140,6 @@ export default {
       }
     }
   }
-
 }
 
 </style>
