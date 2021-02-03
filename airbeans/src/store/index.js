@@ -5,14 +5,14 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-
     overlays : [
       { name: "nav", isActive : false },
       { name: "cart", isActive : false }
     ],
-
-    cart : []
+    order : {},
+    loggedIn : false
   },
+
   mutations: {
     activateOverlay(state, name) {
       let overlay = state.overlays.find(x => x.name == name)
@@ -21,7 +21,7 @@ export default new Vuex.Store({
 
     addItem(state, item) {
 
-      let cart = JSON.parse(sessionStorage.getItem('cart'))
+      let cart = state.order.cart
 
       // Add the item and update the cart
       if(cart.filter(x => x.title == item.title).length == 0) {
@@ -29,7 +29,7 @@ export default new Vuex.Store({
         item.quantity = 1
         item.totalPrice = item.price
         cart.push(item)
-        sessionStorage.setItem('cart', JSON.stringify(cart))
+        sessionStorage.setItem('order', JSON.stringify(state.order))
       }
       else {
         let cartItem = cart.filter(x => x.title == item.title)[0]
@@ -37,17 +37,17 @@ export default new Vuex.Store({
         // If it already exists in the cart, increase the quantity and set the price
         cartItem.quantity++
         cartItem.totalPrice = (cartItem.quantity * cartItem.price)
-        sessionStorage.setItem('cart', JSON.stringify(cart))
+        sessionStorage.setItem('order', JSON.stringify(state.order))
       }
 
       // Update the cart in state
-      state.cart = JSON.parse(sessionStorage.getItem('cart'))
+      state.order = JSON.parse(sessionStorage.getItem('order'))
     },
 
     removeItem(state, item) {
 
       // Get the cart
-      let cart = JSON.parse(sessionStorage.getItem('cart'))
+      let cart = state.order.cart
 
       // Get the item
       let cartItem = cart.filter(x => x.title == item.title)[0]
@@ -64,8 +64,12 @@ export default new Vuex.Store({
       }
 
       // Update the cart
-      sessionStorage.setItem('cart', JSON.stringify(cart))
-      state.cart = JSON.parse(sessionStorage.getItem('cart'))
+      sessionStorage.setItem('order', JSON.stringify(state.order))
+      state.order = JSON.parse(sessionStorage.getItem('order'))
+    },
+
+    setLogin(state, value) {
+      state.loggedIn = value
     }
   },
   actions: {

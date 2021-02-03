@@ -1,0 +1,3 @@
+Skapa en checker på Orderstatus som kollar om det finns en aktiv order
+
+Lägg till ordern i orderHistory när betalning sker

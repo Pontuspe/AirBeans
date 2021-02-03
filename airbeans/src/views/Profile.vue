@@ -1,13 +1,43 @@
 <template>
-  <div></div>
+  <div class="container">
+
+    <div class="content">
+      <LoggedIn 
+      v-if="$store.state.loggedIn"
+      :user="getUser"
+      />
+
+      <Register
+      :user="getUser"
+      v-else
+      />
+    </div>
+  </div>
 </template>
 
 <script>
-export default {
+import Register from '@/components/Register'
+import LoggedIn from '@/components/LoggedIn'
 
+export default {
+components: { Register, LoggedIn },
+
+  computed: {
+    getUser(){
+      return JSON.parse(localStorage.getItem('user'))
+    }
+  }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+.container {
+  margin-top: 7%;
+
+  .content {
+    height: 80%;
+    width: 90%;
+  }
+}
 
 </style>

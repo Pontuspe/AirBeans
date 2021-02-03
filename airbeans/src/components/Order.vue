@@ -57,7 +57,15 @@
                         <p>inkl moms + drönarleverans</p>
                     </div>
 
-                    <button class="black-btn">Take my money!</button>  
+                        <button class="black-btn">
+                            <router-link 
+                            :to="'/status'" 
+                            :style="'color: white; text-decoration: none;'"
+                            @click.native="$store.state.overlays.find(x => x.name == 'cart').isActive = false"
+                            >
+                                Take my money!
+                            </router-link>
+                        </button>  
                 </div>
 
 
@@ -79,7 +87,7 @@ export default {
     components: { Header },
     computed: {
         currentCart() {
-            return this.$store.state.cart
+            return this.$store.state.order.cart
         },
         totalPrice() {
             let sum = 0;

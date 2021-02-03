@@ -11,7 +11,8 @@
     </button>
 
     <!-- Cart button -->
-    <button 
+    <button
+    v-if="$route.path != '/profile'"
     :disabled="nav.isActive" 
     class="btn dark" 
     :class="{fadedOut : nav.isActive}" 

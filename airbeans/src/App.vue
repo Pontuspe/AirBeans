@@ -1,7 +1,7 @@
 <template>
   <div id="app" :class="setBody()">
 
-    <header>
+    <header v-if="$route.path != '/status'">
       <Header
       v-if="!cart.isActive" 
       />
@@ -73,12 +73,35 @@ export default {
 
   created() {
 
-    // Create a new cart on startup
-    if(!sessionStorage.getItem('cart')) {
-      sessionStorage.setItem('cart', '[]')
+    // Get the user
+    if(!localStorage.getItem('user')) {
+      let user = {
+        name : "",
+        email : "",
+        gdpr : false,
+        orderHistory : []
+      }
+
+      localStorage.setItem('user', JSON.stringify(user))
+    }
+    else {
+      this.$store.commit('setLogin', true)
     }
 
-    this.$store.state.cart = JSON.parse(sessionStorage.getItem('cart'))
+    // Create a new cart on startup
+    if(!sessionStorage.getItem('order')) {
+      sessionStorage.setItem('order', '{}')
+    }
+
+    // Get the order
+    let order = JSON.parse(sessionStorage.getItem('order'))
+
+    order.cart = []
+    order.orderNumber = 123
+    order.timeLeft = 13
+
+    this.$store.state.order = order
+    console.log(this.$store.state.order)
   }
 }
 </script>
