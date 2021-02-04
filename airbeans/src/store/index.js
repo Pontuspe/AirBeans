@@ -52,18 +52,27 @@ export default new Vuex.Store({
       }
       else {
         let cartItem = cartItems.filter(x => x.title == item.title)[0]
+
+        // Reset the price
         cartItems.totalPrice -= cartItem.totalPrice
+
         // If it already exists in the cart, increase the quantity and set the price
         cartItem.quantity++
         cartItem.totalPrice = (cartItem.quantity * cartItem.price)
         cartItems.totalPrice += cartItem.totalPrice      
       }
       
-      
-      state.order.cart.timeLeft = state.order.cart.cartItems.length + 1
-      sessionStorage.setItem('order', JSON.stringify(state.order))
+      // Reset the carts total price
+      state.order.cart.totalPrice = 0
 
-      // Update the cart in state
+      // Set the new total price of the cart
+      state.order.cart.cartItems.forEach(x => state.order.cart.totalPrice += x.totalPrice)
+
+      // Set time left of order
+      state.order.cart.timeLeft = state.order.cart.cartItems.length + 1
+
+      // Update the cart in state and session storage
+      sessionStorage.setItem('order', JSON.stringify(state.order))
       state.order = JSON.parse(sessionStorage.getItem('order'))
     },
 

@@ -73,6 +73,9 @@ export default {
 .container {
   flex-direction: column;
   justify-content: flex-start;
+  align-items: center;
+  position: fixed;
+  width: 100%;
 
   .menu-item {
     margin-top: 2rem;
