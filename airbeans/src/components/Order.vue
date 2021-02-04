@@ -57,17 +57,15 @@
                         <p>inkl moms + drönarleverans</p>
                     </div>
 
-                        <button class="black-btn">
+                        <button class="black-btn" @click="addOrder"> 
                             <router-link 
                             :to="'/status'" 
                             :style="'color: white; text-decoration: none;'"
-                            @click.native="$store.state.overlays.find(x => x.name == 'cart').isActive = false"
                             >
                                 Take my money!
                             </router-link>
                         </button>  
                 </div>
-
 
             </div>
         </div>
@@ -87,7 +85,7 @@ export default {
     components: { Header },
     computed: {
         currentCart() {
-            return this.$store.state.order.cart
+            return this.$store.state.order.cart.cartItems
         },
         totalPrice() {
             let sum = 0;
@@ -103,6 +101,17 @@ export default {
                 this.show = false
                 this.showArrow = false
             }
+        },
+        addOrder(){
+            // Updates the users order history
+            let user = JSON.parse(localStorage.getItem('user'))
+            user.orderHistory.push(this.$store.state.order)
+            localStorage.setItem('user', JSON.stringify(user))
+            // closes the cart overlay
+            this.$store.state.overlays.find(x => x.name == 'cart').isActive = false
+
+            // creates a new order after checkout
+            this.$store.commit('createNewOrder')
         }
     },
 

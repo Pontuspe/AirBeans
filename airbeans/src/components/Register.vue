@@ -47,7 +47,12 @@ export default {
     methods: {
       createUser() {
         localStorage.setItem('user', JSON.stringify(this.user))
-        this.$store.commit('setLogin', true)
+        if(this.user.gdpr){
+          this.$store.commit('setLogin', true)
+          }
+        else{
+          alert("Acceptera GDPR")
+        }
       }
     }
 

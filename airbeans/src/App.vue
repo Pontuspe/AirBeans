@@ -68,11 +68,9 @@ export default {
       else {
         this.cartActive = !this.cartActive
       }
-    }
-  },
-
-  created() {
-
+    },
+    createUser(){
+    
     // Get the user
     if(!localStorage.getItem('user')) {
       let user = {
@@ -84,24 +82,17 @@ export default {
 
       localStorage.setItem('user', JSON.stringify(user))
     }
-    else {
+    else if(JSON.parse(localStorage.getItem('user')).gdpr) {
       this.$store.commit('setLogin', true)
     }
+    }
+  },
+
+  created() {
+    this.createUser()
 
     // Create a new cart on startup
-    if(!sessionStorage.getItem('order')) {
-      sessionStorage.setItem('order', '{}')
-    }
-
-    // Get the order
-    let order = JSON.parse(sessionStorage.getItem('order'))
-
-    order.cart = []
-    order.orderNumber = 123
-    order.timeLeft = 13
-
-    this.$store.state.order = order
-    console.log(this.$store.state.order)
+    this.$store.commit('createNewOrder')
   }
 }
 </script>

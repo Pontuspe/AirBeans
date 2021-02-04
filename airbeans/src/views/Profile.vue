@@ -2,14 +2,15 @@
   <div class="container">
 
     <div class="content">
-      <LoggedIn 
+      
+      <LoggedIn
       v-if="$store.state.loggedIn"
       :user="getUser"
       />
 
       <Register
+      v-else 
       :user="getUser"
-      v-else
       />
     </div>
   </div>

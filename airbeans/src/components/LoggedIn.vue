@@ -12,7 +12,7 @@
           <h1>Orderhistorik</h1>
           <ul>
               <li
-              v-for="(order, index) in orderHistory"
+              v-for="(order, index) in user.orderHistory"
               :key="index"
               class="orderItem"
               >
@@ -23,15 +23,15 @@
                   </div>
                   <div class="wrapperBottom">
                       <p>total ordersumma</p>
-                      <p>{{order.price}} kr</p>
+                      <p>{{order.cart.totalPrice}} kr</p>
                   </div>
               </div>
-                <hr class="separator" v-if="index != orderHistory.length - 1">
+                <hr class="separator" v-if="index != user.orderHistory.length - 1">
               </li>
               <hr>
               <div class="orderBottom">
                 <p><strong>Totalt Spenderat</strong></p>
-                <p>1200 kr</p>
+                <p>{{totalSpendings}} kr</p>
               </div>
           </ul>
       </div>
@@ -44,25 +44,15 @@ export default {
     props: {
         user : Object
     },
+    computed:{
+        totalSpendings(){
+            let totalSpending = 0
+            this.user.orderHistory.forEach(x => totalSpending += x.cart.totalPrice)
+            return totalSpending
+        }
+        
+    },
 
-    data() { return {
-        orderHistory : [
-            {
-                orderNumber : "123",
-                orderDate : "20/03/06",
-                price : "443"
-            },
-                        {
-                orderNumber : "123",
-                orderDate : "20/03/06",
-                price : "443"
-            },            {
-                orderNumber : "123",
-                orderDate : "20/03/06",
-                price : "443"
-            },
-        ]
-    }}
 }
 </script>
 

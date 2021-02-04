@@ -6,7 +6,7 @@
 
     <div>
       <h1>Din beställning är på väg!</h1>
-      <h4><strong>{{currentOrder.timeLeft}}</strong> minuter</h4>
+      <h4><strong>{{currentOrder.cart.timeLeft}}</strong> minuter</h4>
     </div>
 
     <router-link :to="'/'">
@@ -18,10 +18,21 @@
 
 <script>
 export default {
-  computed: {
-    currentOrder(){
-      return this.$store.state.order
-    }
+
+data(){return{
+  currentOrder : {
+    cart : [],
+    orderNumber : 0,
+    timeLeft : 0
+  }
+}},
+
+  mounted(){
+      setTimeout(()=> {
+        this.currentOrder = JSON.parse(localStorage.getItem('user')).orderHistory[JSON.parse(localStorage.getItem('user')).orderHistory.length -1]
+      console.log(JSON.parse(localStorage.getItem('user')))
+      },0)
+      
   }
 }
 </script>

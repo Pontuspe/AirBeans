@@ -24,7 +24,7 @@ const routes = [
   },
   {
     path: '/status',
-    component: Status
+    component: Status,
   },
   {
     path: '/menu',
